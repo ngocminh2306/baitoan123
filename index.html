@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>Bai toan</h2>
+
+    <p id="repo_array"></p>
+    <label>
+        KEYWORD
+    </label>
+    <input id="keyword" value="KEYWORD" />
+    <label>
+        rawString
+    </label>
+    <input id="rawstring" value="LXQAJI" />
+    <p id="unique"></p>
+    <button onclick="endcode()">endcode</button>
+    <button onclick="decode()">decode</button>
+    <div>
+        <span>
+            Result:
+        </span>
+        <span id="result"></span>
+    </div>
+    <script>
+        var repo_array = [];
+        var result_array = [];
+        var index = 0;
+        //tạo mảng ASCII
+        for (var i = 65; i <= 90; i++) {
+            repo_array.push(String.fromCharCode(i));
+            index++;
+        }
+        console.log(repo_array);
+        function runResultArray(keyword) {
+            var keywordArray = keyword.split('');
+            //Result arrya
+            var result = [];
+            for (var i = 0; i < repo_array.length; i++) {
+                result.push(repo_array[i]);
+            }
+            result = keywordArray.concat(result);
+
+            //Loại trùng lặp
+            function onlyUnique(value, index, self) {
+                return self.indexOf(value) === index;
+            }
+            var unique = result.filter(onlyUnique);
+            result_array = unique;
+            console.log(unique);
+            document.getElementById("repo_array").innerHTML = repo_array;
+            document.getElementById("unique").innerHTML = unique;
+        }
+      
+        function endcode() {
+            var keyword = document.getElementById("keyword").value;
+            var rawString = document.getElementById("rawstring").value;
+            if (keyword) {
+                runResultArray(keyword)
+            } else {
+
+            }
+            if (!rawString) {
+                alert('input request');
+                return;
+            }
+            //rawString to arry char
+            var rawStringArray = rawString.split('');
+            //         
+            var endcode_result ='';
+            for (var i = 0; i < rawStringArray.length; i++) {
+                endcode_result += repo_array[result_array.indexOf(rawStringArray[i])];
+            }
+            //Display a result
+            document.getElementById("result").innerHTML = endcode_result;
+
+        }
+        function decode() {
+            var keyword = document.getElementById("keyword").value;
+            var rawString = document.getElementById("rawstring").value;
+            if (keyword) {
+                runResultArray(keyword)
+            } else {
+
+            }
+            if (!keyword || !rawString) {
+                alert('input request');
+                return;
+            }
+
+            //Display a result
+            document.getElementById("result").innerHTML = rawString;
+        }
+    </script>
+
+</body>
+
+</html>
