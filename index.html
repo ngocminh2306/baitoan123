@@ -87,9 +87,15 @@
                 alert('input request');
                 return;
             }
-
+            //rawString to arry char
+            var rawStringArray = rawString.split('');
+            //         
+            var endcode_result ='';
+            for (var i = 0; i < rawStringArray.length; i++) {
+                endcode_result += result_array[repo_array.indexOf(rawStringArray[i])];
+            }
             //Display a result
-            document.getElementById("result").innerHTML = rawString;
+            document.getElementById("result").innerHTML = endcode_result;
         }
     </script>
 
